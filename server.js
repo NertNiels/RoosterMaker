@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 global.database = require('./database-handler.js');
 const authentication = require('./authentication-manager.js');
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 const public = __dirname + "/public";
 
 app.use(bodyParser.json());

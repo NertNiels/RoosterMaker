@@ -16,6 +16,8 @@ exports.authenticateLogin = function(req, res) {
 exports.authenticateRegister = function(req, res) {
   var body = Object.entries(req.body);
 
+  var auth_key = req.params.auth_key ? req.params.auth_key : "0";
+
   var authenticate_key = body[0][1];
   var firstname = body[1][1];
   var lastname = body[2][1];
@@ -41,17 +43,17 @@ exports.authenticateRegister = function(req, res) {
   if(jobs_form.includes("sound")) jobs[7] = 1;
   if(jobs_form.includes("beamer")) jobs[8] = 1;
   if(! authenticate_key || !firstname || !lastname || !email || !password || !password2) {
-    return done(req, res, null, false, 'All required fields (*) must be filled in.', '/register');
+    return done(req, res, null, false, 'All required fields (*) must be filled in.', '/register/'+auth_key);
   }
   if(password !== password2) {
-    return done(req, res, null, false, 'The passwords you typed do not match.', '/register');
+    return done(req, res, null, false, 'The passwords you typed do not match.', '/register/'+auth_key);
   }
   database.registerUser(authenticate_key, firstname, lastname, email, password, jobs, (err, message, succeeded) => {
-    if(err) return done(req, res, err, false, message, '/register');
+    if(err) return done(req, res, err, false, message, '/register/'+auth_key);
     if(succeeded) {
       return done(req, res, null, false, message, '/');
     }
-    else return done(req, res, null, false, message, '/register');
+    else return done(req, res, null, false, message, '/register/'+auth_key);
   });
 }
 

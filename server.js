@@ -95,6 +95,7 @@ app.get('/register/:auth_key', (req, res) => {
   req.session.warning = null;
 });
 
+app.post('/register/:auth_key', authentication.authenticateRegister)
 app.post('/register', authentication.authenticateRegister)
 
 app.post('/login', authentication.authenticateLogin);

@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Muziekrooster EGE</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+
+
+  </head>
+  <body>
+    <div class="form-div" style="width:40em;">
+      <div class="login-img-container">
+        <img src="/logo">
+      </div>
+      <h1 class="form-title">Hello, <span style="color:">{{firstname}}</span></h1>
+      {{#if filled}}
+        <div class="warning">
+            You did not fill in your available dates yet.
+        </div>
+      {{/if}}
+
+      <form>
+        <input style="display:inline-block;width:40%" type="button" onclick="location.href='/givein'" value="Fill in dates">
+        <input style="display:inline-block;width:40%;float:right;" type="button" onclick="location.href='/logout'" value="Logout">
+      </form>
+
+      {{#if admin}}
+      <div class="table_container">
+        <table class="table">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>filled</th>
+            <th>Admin</th>
+          </tr>
+          {{#each users}}
+            <tr class="table_row">
+              <td class="user_table_name" title="{{firstname}} {{lastname}}">
+                {{this.firstname}} {{this.lastname}}
+              </td>
+              <td class="user_table_email" title="{{email}}">
+                {{this.email}}
+              </td>
+              <td class="user_table_filled">
+                {{#if this.filled}}
+                  <div class="user_table_filled_true"><img src="/check_img"/></div>
+                {{else}}
+                  <div class="user_table_filled_false"><img src="/cancel_img"/></div>
+                {{/if}}
+              </td>
+              {{#if this.admin}}
+                <td class="user_table_admin" title="Make user">
+                  <a href="/admin/makeuser/{{this.id}}">
+                    <div class="user_table_admin_true">yes</div>
+                  </a>
+                </td>
+              {{else}}
+                <td class="user_table_admin" title="Make admin">
+                  <a href="/admin/makeadmin/{{this.id}}">
+                    <div class="user_table_admin_false">no</div>
+                  </a>
+                </td>
+              {{/if}}
+              <td class="user_table_delete" title="Delete this user">
+                <a href="/admin/deleteuser/{{this.id}}"><div><img src="/trash_img"/></div></a>
+              </td>
+            </tr>
+          {{/each}}
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>filled</th>
+            <th>Admin</th>
+          </tr>
+        </table>
+      </div>
+      <div class="table_container" style="width: 50%">
+        <input style="position: absolute; top: -9999px; left: -9999px;" type="text" id="auth_key_copy_text">
+        <table class="table">
+          <tr>
+            <th>Authentication Key</th>
+          </tr>
+          {{#each authentication_keys}}
+            <tr class="table_row">
+              <td class="auth_table_cell">{{this.authenticate_key}}</td>
+              <td>
+                <a href="javascript: copyLink('{{this.authenticate_key}}');">
+                  <div class="auth_table_cell">
+                    Create link
+                  </div>
+                </a>
+              </td>
+              <td class="user_table_delete" title="Delete this key">
+                <a href="/admin/deleteAuthKey/{{this.authenticate_key}}"><div><img src="/trash_img"/></div></a>
+              </td>
+            </tr>
+          {{/each}}
+          <tr class="table_row">
+            <td colspan="3">
+              <a href="/admin/addAuthKey">
+                <div class="auth_table_cell">
+                  Add a new one
+                </div>
+              </a>
+            </td>
+          </tr>
+          <tr>
+            <th>Authentication Key</th>
+          </tr>
+        </table>
+      </div>
+      <script type="text/javascript">
+        function copyLink(auth_key) {
+          var copyText = document.getElementById("auth_key_copy_text");
+          copyText.value = window.location.host + "/register/" + auth_key;
+          copyText.select();
+          document.execCommand("copy");
+          alert("Register link copied to clipboard.");
+          copyText.value = "";
+        }
+      </script>
+      {{/if}}
+    </div>
+
+  </body>
+</html>

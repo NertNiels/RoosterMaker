@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="nl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Invullen Data</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="form-div">
+      <h1 class="form-title">Fill in dates</h1>
+      <form class="login" action="/givein" method="post">
+        <div class="form-container">
+
+          {{#each dates}}
+            <div id="hallo">
+              <div class="radio-row">
+                <label>{{this.date_name}}</label>
+                <div class="radio-holder">
+                  <input type="radio" name="{{this.date}}" id="{{this.date}}_true" value="true" checked>
+                  <label for="{{this.date}}_true"><div class="radio-true"><img src="/check_img"/></div></label>
+                  <input type="radio" name="{{this.date}}" id="{{this.date}}_false" value="false">
+                  <label for="{{this.date}}_false"><div class="radio-false"><img src="/cancel_img"/</div></label>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+          <input type="submit" value="Invullen"/>
+        </div>
+      </form>
+    </div>
+
+    <script type="text/javascript">
+
+      window.onload = function() {
+        var dates = JSON.parse('{{dates_pass}}'.replace(/&quot;/g, '"'));
+
+
+        var original = document.getElementById("hallo").firstChild;
+
+        for(i = 0; i < dates.length; i++) {
+          var data = dates[i].split("_");
+
+          var date = new Date(parseInt(data[2]), parseInt(data[1]-1), parseInt(data[0]));
+          var dateString = date.toDateString();
+
+          var cln = original.cloneNode(true);
+          console.log(cln);
+          cln.innerHTML.replace("date_name_here", dateString);
+          cln.innerHTML.replace("date_here", dates[i]);
+          document.getElementById("radio-row-container").appendChild(cln);
+        }
+      }
+
+    </script>
+
+  </body>
+</html>

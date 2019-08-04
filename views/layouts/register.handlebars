@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Login</title>
+    <link rel="stylesheet" href="/css/main.css">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans&display=swap" rel="stylesheet">
+  </head>
+  <body>
+
+    <div class="form-div">
+      <div class="login-img-container">
+        <img src="/logo">
+      </div>
+      <h1 class="form-title">Register</h1>
+      {{#if warning}}
+        <div class="warning">
+            {{warning}}
+        </div>
+      {{/if}}
+      <form class="login" action="/register" method="post">
+        <div class="form-container">
+          <div>
+            <label>* Authentication key:</label><br>
+            <input type="text" name="authenticate_key" placeholder="Authentication key" maxlength="8" value="{{auth_key}}"/>
+          </div>
+          <div>
+            <label>* First name:</label><br>
+            <input type="text" name="firstname" placeholder="Jan"/>
+          </div>
+          <div>
+            <label>* Last name:</label><br>
+            <input type="text" name="lastname" placeholder="de Man"/>
+          </div>
+          <div>
+            <label>* Email:</label><br>
+            <input type="text" name="email" placeholder="example@example.com"/>
+          </div>
+          <div>
+            <label>* Password:</label><br>
+            <input type="password" name="passport" placeholder="password123" maxlength="20"/>
+          </div>
+          <div>
+            <label>* Type password again:</label><br>
+            <input type="password" name="passport2" placeholder="password123"/>
+          </div>
+          <div>
+            <label>Please select all the things you do in the team.</label><br>
+            <input type="checkbox" name="job" value="sing_leader" /><label for="sing_leader">Sing Leader</label><br>
+            <input type="checkbox" name="job" value="singer" /><label for="singer">Singer</label><br>
+            <input type="checkbox" name="job" value="guitarist" /><label for="guitarist">Guitarist</label><br>
+            <input type="checkbox" name="job" value="bass_guitarist" /><label for="bass_guitarist">Bass Guitarist</label><br>
+            <input type="checkbox" name="job" value="pianist" /><label for="pianist">Pianist</label><br>
+            <input type="checkbox" name="job" value="drummer" /><label for="drummer">Drummer</label><br>
+            <input type="checkbox" name="job" value="elec_guitarist" /><label for="elec_guitarist">Electric Guitarist</label><br>
+            <input type="checkbox" name="job" value="sound" /><label for="sound">Sound</label><br>
+            <input type="checkbox" name="job" value="beamer" /><label for="beamer">Beamer</label><br>
+          </div>
+          <label style="color:red;">* = required</label>
+          <input type="submit" value="Register"/>
+          <label><a href="/login">I already have an account.</a></label>
+        </div>
+      </form>
+    </div>
+  </body>
+</html>

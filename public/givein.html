@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="nl" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Invullen Data</title>
+    <link rel="stylesheet" href="/css/givein.css">
+  </head>
+  <body>
+    <form action="/givein" method="post">
+      <select name="userid">
+        <option value="0">person1</option>
+        <option value="1" selected>person2</option>
+        <option value="2">person3</option>
+      </select>
+      <br>
+
+      <table id="dateform" class="givein_form">
+      </table>
+
+      <input type="submit" value="Invullen">
+    </form>
+
+    <script type="text/javascript">
+
+      var dates = [
+        "14_7_2019",
+        "21_7_2019",
+        "28_7_2019",
+        "4_8_2019",
+        "11_8_2019",
+        "18_8_2019",
+      ];
+
+      var dateform = document.getElementById("dateform");
+
+      for(i = 0; i < dates.length; i++) {
+        var data = dates[i].split("_");
+        var date = new Date(parseInt(data[2]), parseInt(data[1]-1), parseInt(data[0]));
+
+        var row = dateform.insertRow(-1);
+
+        var nameCell = row.insertCell(0);
+        var cell1 = row.insertCell(1);
+        var cell2 = row.insertCell(2);
+
+        nameCell.innerHTML = date.toDateString();
+        cell1.innerHTML = "<input type=\"radio\" name=\"" + dates[i] + "\" value=\"true\" checked>";
+        cell2.innerHTML = "<input type=\"radio\" name=\"" + dates[i] + "\" value=\"false\">";
+      }
+
+    </script>
+
+  </body>
+</html>

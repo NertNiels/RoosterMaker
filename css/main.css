@@ -1,0 +1,278 @@
+body {
+  background-color: #f2f2f2;
+}
+
+.form-div {
+  width: 30em;
+  margin: auto;
+  border-style: solid;
+  border-radius: 2em;
+  border-color: white;
+  background-color: white;
+  box-shadow: 0 5px 20px 5px rgba(0, 0, 0, 0.2);
+  padding: 2em;
+  padding-top: 0;
+}
+
+.form-title {
+  font-family: 'PT Sans', sans-serif;
+}
+
+.login-img-container {
+  width:100%;
+}
+
+.login-img-container img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.form-container {
+  padding-top: 0;
+}
+
+.warning {
+  padding: 1em;
+  margin-top: 1em;
+  margin-bottom: 1em;
+
+  background-color: #fe5454;
+  box-shadow: 0 0 5px 0 #fe5454;
+  border-radius: 0.5em;
+
+  color: white;
+  font-family: 'PT Sans', sans-serif;
+}
+
+.form-div input {
+  width: 100%;
+  font-size: 1em;
+  border-radius: 0.5em;
+  border: none;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+  line-height: 200%;
+  padding-left: 1em;
+  box-sizing: border-box;
+  margin-bottom: 1em;
+  font-family: 'PT Sans', sans-serif;
+}
+
+input[type=submit], input[type=button] {
+  background-color: #32ADBC;
+  color: white;
+  margin-bottom: 0;
+  margin-top: 1em;
+  padding-left: 0;
+  padding-right: 0;
+  transition: background 0.2s ease-in-out, box-shadow 0.1s ease-in-out;
+}
+
+input[type=submit]:hover, input[type=button]:hover {
+  background-color: #108B9A;
+}
+
+input[type=submit]:active, input[type=button]:active {
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 1);
+}
+
+.form-div input[type=checkbox] {
+  width: inherit;
+  margin-right: 1em;
+  background-color: black;
+}
+
+.form-div label {
+  line-height: 200%;
+  font-family: 'PT Sans', sans-serif;
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.form-div input[type=radio] {
+  width: inherit;
+  /* display: none; */
+}
+
+.radio-holder {
+  float:right;
+  display: inline-block;
+}
+
+.radio-row {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.radio-true, .radio-false {
+  border-radius: 25%;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.2);
+  display: inline-block;
+  background-color: #eee;
+  margin-left: 0.5em;
+  width: 2em;
+  height: 2em;
+  opacity: 1;
+  transition: background 0.2s ease-in-out;
+}
+
+.radio-true:hover, .radio-false:hover {
+  background-color: #ddd;
+}
+
+.radio-true > img, .radio-false > img {
+  width: 100%;
+}
+
+input[type=radio] {
+  display: none;
+}
+
+input[type=radio]:checked + label > .radio-true {
+  background: #3f9900;
+}
+
+input[type=radio]:checked + label > .radio-false {
+  background: #ff0000;
+}
+
+a {
+  font-family: 'PT Sans', sans-serif;
+  text-decoration: none;
+  color: blue;
+}
+
+.main_page_btn_top {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+.table_container {
+  background-color: #117885;
+  border-radius: 0.5em;
+  margin-top: 1em;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.4);
+
+}
+
+.table {
+  width:100%;
+  border-collapse: collapse;
+  font-family: 'PT Sans', sans-serif;
+  color:white;
+}
+
+th {
+  line-height: 200%;
+}
+
+.table_row:nth-child(even) {
+  height: 2em;
+  background-color: #32ADBC;
+}
+
+.table_row:nth-child(odd) {
+  height: 2em;
+  background-color: #108B9A;
+}
+
+.user_table_row:nth-child(even) > .user_table_delete {
+  background-color: #ff0000;
+}
+
+.user_table_row:nth-child(odd) > .user_table_delete {
+  background-color: #cc0000;
+}
+
+.user_table_name, .user_table_email {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.user_table_row > div {
+  display: inline-block;
+  margin: 0;
+}
+
+.user_table_name {
+  width: 20%;
+  line-height: 200%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  text-align: left;
+}
+
+.user_table_email {
+  width:40%;
+  line-height: 200%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  text-align: left;
+}
+
+.user_table_filled {
+  text-align: right;
+  width: 2em;
+  padding: 0;
+}
+.user_table_filled > div {
+  width: 2em;
+  margin-left: auto;
+  margin-right: auto;
+  vertical-align: middle;
+}
+.user_table_filled > div > img {
+  width: 100%;
+  vertical-align: middle;
+}
+.user_table_filled_true {
+  width:100%;
+}
+.user_table_filled_false {
+  width:100%;
+}
+
+.user_table_admin > a > div {
+  color: white;
+  text-align: center;
+}
+
+.user_table_admin_false {
+
+  line-height: 200%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.user_table_admin_true {
+
+  line-height: 200%;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+}
+
+.user_table_delete {
+  width:2em;
+  background-color: #ff0000;
+}
+
+.user_table_delete > a > div {
+  width: 2em;
+  height: 2em;
+  vertical-align: middle;
+
+}
+.user_table_delete > a > div > img {
+  width: 100%;
+  vertical-align: middle;
+}
+
+.auth_table_cell {
+  line-height: 200%;
+  height:100%;
+  text-align: center;
+  color: white;
+}

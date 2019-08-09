@@ -28,12 +28,15 @@ app.get('/check_img', (req, res) => res.sendFile(public + '/check.png'));
 app.get('/trash_img', (req, res) => res.sendFile(public + '/trash.png'));
 
 app.get('/', (req, res) => {
+  console.log("www");
   if(!req.session.isAuthenticated) res.redirect('/login');
   else {
     database.getUserData(req.session.user_id, (err, result) => {
       database.getAllUserData((err1, result1) => {
-        database.getAllAuthenticationKeys((err, result2) => {
-          res.render('main', {layout: 'index', firstname: req.session.user_firstname, filled: result.filled == 0, admin: result.admin == 1, users: result1, authentication_keys: result2 });
+        database.getAllAuthenticationKeys((err2, result2) => {
+          database.getAllAvailabilities((err3, result3, users_availability) => {
+            res.render('main', {layout: 'index', firstname: req.session.user_firstname, filled: result.filled == 0, admin: result.admin == 1, users: result1, authentication_keys: result2, date_availability: result3, users_data_availability: users_availability, });
+          });
         });
       });
     });

@@ -15,52 +15,58 @@ db.connect((err) => {
   console.log("Connected to MySQL...");
 });
 
+exports.getAllAvailabilities = function(callback) {
+  db.query("SELECT *, DATE_FORMAT(STR_TO_DATE(date, '%d_%m_%Y'), '%e %M %Y') AS date_name FROM dates ORDER BY STR_TO_DATE(date, '%d_%m_%Y');", (err, result) => {
+    var users = [];
+
+    for(i = 0; i < result.length; i++) {
+      result[i].sing_leaders = JSON.parse(result[i].sing_leaders);
+      for(j = 0; j < result[i].sing_leaders.length; j++) { result[i].sing_leaders[j] = parseInt(result[i].sing_leaders[j]); }
+      result[i].singers = JSON.parse(result[i].singers);
+      for(j = 0; j < result[i].singers.length; j++) { result[i].singers[j] = parseInt(result[i].singers[j]); }
+      result[i].guitarists = JSON.parse(result[i].guitarists);
+      for(j = 0; j < result[i].guitarists.length; j++) { result[i].guitarists[j] = parseInt(result[i].guitarists[j]); }
+      result[i].bass_guitarists = JSON.parse(result[i].bass_guitarists);
+      for(j = 0; j < result[i].bass_guitarists.length; j++) { result[i].bass_guitarists[j] = parseInt(result[i].bass_guitarists[j]); }
+      result[i].pianists = JSON.parse(result[i].pianists);
+      for(j = 0; j < result[i].pianists.length; j++) { result[i].pianists[j] = parseInt(result[i].pianists[j]); }
+      result[i].drummers = JSON.parse(result[i].drummers);
+      for(j = 0; j < result[i].drummers.length; j++) { result[i].drummers[j] = parseInt(result[i].drummers[j]); }
+      result[i].elec_guitarists = JSON.parse(result[i].elec_guitarists);
+      for(j = 0; j < result[i].elec_guitarists.length; j++) { result[i].elec_guitarists[j] = parseInt(result[i].elec_guitarists[j]); }
+      result[i].sounds = JSON.parse(result[i].sounds);
+      for(j = 0; j < result[i].sounds.length; j++) { result[i].sounds[j] = parseInt(result[i].sounds[j]); }
+      result[i].beamers = JSON.parse(result[i].beamers);
+      for(j = 0; j < result[i].beamers.length; j++) { result[i].beamers[j] = parseInt(result[i].beamers[j]); }
+    }
+
+    exports.getAllUserData((error, userData) => {
+      if(error) return;
+      for(i = 0; i < userData.length; i++) {
+        users[userData[i].id] = {
+          id: userData[i].id,
+          firstname: userData[i].firstname,
+          lastname: userData[i].lastname,
+          email: userData[i].email
+        }
+      }
+
+      callback(err, result, users);
+    });
+  });
+}
+
 exports.getAllDates = function(callback) {
-  db.query("SELECT date FROM dates", (err, result) => {
+  db.query(" SELECT date, DATE_FORMAT(STR_TO_DATE(date, '%d_%m_%Y'), '%W %M %e %Y') AS date_name FROM dates ORDER BY STR_TO_DATE(date, '%d_%m_%Y');", (err, result) => {
     if(err) callback(err, null);
     var dates = [];
-    var date_names = [];
-    var parsed_dates = [];
     for(i = 0; i < result.length; i++) {
-      dates[i] = result[i].date;
-      var sub = result[i].date.split("_");
-      parsed_dates[i] = {day: parseInt(sub[0]), month: parseInt(sub[1]), year: parseInt(sub[2]), isDone: false, index: i}
-      var date = new Date(parseInt(sub[2]), parseInt(sub[1]-1), parseInt(sub[0]));
-      date_names[i] = date.toDateString();
-    }
-
-    var new_dates = [];
-    var i = 0;
-
-    while(true) {
-      var currentLowest;
-      for(j = 0; j < parsed_dates.length; j++) {
-        if(!parsed_dates[j].isDone) {
-          currentLowest = parsed_dates[j];
-          break;
-        }
+      dates[i] = {
+        date: result[i].date,
+        date_name: result[i].date_name,
       }
-      for(j = 0; j < parsed_dates.length; j++) {
-        if(!parsed_dates[j].isDone) {
-          if(parsed_dates[j].year < currentLowest.year) currentLowest = parsed_dates[j];
-          else if(parsed_dates[j].year == currentLowest.year) {
-            if(parsed_dates[j].month < currentLowest.month) currentLowest = parsed_dates[j];
-            else if(parsed_dates[j].month == currentLowest.month) {
-              if(parsed_dates[j].day < currentLowest.day) currentLowest = parsed_dates[j];
-            }
-          }
-        }
-      }
-      new_dates[i] = {
-        date: dates[currentLowest.index],
-        date_name: date_names[currentLowest.index],
-      };
-      currentLowest.isDone = true;
-      i++;
-      if(i >= dates.length) break;
     }
-
-    callback(null, new_dates);
+    callback(null, dates);
   });
 }
 

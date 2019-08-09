@@ -156,11 +156,14 @@ a {
 
 }
 
-.table {
+.table, .table_availability {
   width:100%;
-  border-collapse: collapse;
   font-family: 'PT Sans', sans-serif;
   color:white;
+}
+
+.table {
+  border-collapse: collapse;
 }
 
 th {

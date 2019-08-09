@@ -75,7 +75,8 @@
           </tr>
         </table>
       </div>
-      <div class="table_container" style="width: 50%">
+
+      <div class="table_container">
         <input style="position: absolute; top: -9999px; left: -9999px;" type="text" id="auth_key_copy_text">
         <table class="table">
           <tr>
@@ -120,7 +121,55 @@
           copyText.value = "";
         }
       </script>
+
+      <div class="table_container">
+        <table class="table_availability">
+          <tr>
+            <th>Date</th>
+            <th>Sing Leaders</th>
+            <th>Singers</th>
+            <th>Guitarists</th>
+            <th>Bass Guitarists</th>
+            <th>Pianists</th>
+            <th>Drummers</th>
+            <th>Electric Guitarists</th>
+            <th>Sound</th>
+            <th>Beamer</th>
+          </tr>
+          {{#each date_availability}}
+            <tr class="table_row">
+              <td>{{this.date}}</td>
+              <td>
+                {{#each this.sing_leaders}}
+                  {{this}} <br>
+                {{/each}}
+              </td>
+              <td>{{this.singers}}</td>
+              <td>{{this.guitarists}}</td>
+              <td>{{this.bass_guitarists}}</td>
+              <td>{{this.pianists}}</td>
+              <td>{{this.drummers}}</td>
+              <td>{{this.elec_guitarists}}</td>
+              <td>{{this.sounds}}</td>
+              <td>{{this.beamers}}</td>
+            </tr>
+          {{/each}}
+          <tr>
+            <th>Date</th>
+            <th>Sing Leaders</th>
+            <th>Singers</th>
+            <th>Guitarists</th>
+            <th>Bass Guitarists</th>
+            <th>Pianists</th>
+            <th>Drummers</th>
+            <th>Electric Guitarists</th>
+            <th>Sound</th>
+            <th>Beamer</th>
+          </tr>
+        </table>
+      </div>
       {{/if}}
+
     </div>
 
   </body>
